@@ -1,0 +1,6 @@
+node_modules
+*.js
+*.map
+*.log
+output
+.env

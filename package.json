@@ -1,0 +1,37 @@
+{
+  "name": "docktor",
+  "version": "0.1.0",
+  "description": "Docker API over SSH",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seikho/node-docktor.git"
+  },
+  "keywords": [
+    "docker",
+    "api",
+    "ssh"
+  ],
+  "author": "Carl Winkler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seikho/node-docktor/issues"
+  },
+  "homepage": "https://github.com/seikho/node-docktor#readme",
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "@types/ssh2": "^0.5.37",
+    "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "ssh2": "^0.8.2"
+  },
+  "files": [
+    "output/**/*.js",
+    "output/**/*.ts"
+  ],
+  "typings": "output/index.d.ts"
+}
