@@ -1,14 +1,14 @@
 import * as ssh from 'ssh2'
 import { Host } from './types'
-import { getAll } from './container/get-all'
-import { readFileSync } from 'fs'
+import { create } from './container'
 
 export async function connect(host: Host) {
   const client = await getClient(host)
+  const container = create(client)
 
-  const containers = await getAll(client)
-  console.log(containers)
-  return client
+  return {
+    container
+  }
 }
 
 function getClient(host: Host) {
@@ -27,10 +27,3 @@ function getClient(host: Host) {
 
   return promise
 }
-
-connect({
-  host: process.env.TEST_HOST || '',
-  port: 22,
-  privateKey: readFileSync(process.env.TEST_KEY || '').toString(),
-  username: process.env.TEST_USER || ''
-})

@@ -1,7 +1,12 @@
 import { Client } from 'ssh2'
+import { getAll } from './get-all'
+import { inspect } from './inspect'
+import { getStats, StatsCallback } from './stat'
 
-export class Container {
-  constructor(public client: Client) {}
-
-  getContainers = async () => {}
+export function create(client: Client) {
+  return {
+    getAll: () => getAll(client),
+    inspect: (id: string) => inspect(client, id),
+    stats: (cb: StatsCallback) => getStats(client, cb)
+  }
 }

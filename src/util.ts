@@ -38,17 +38,31 @@ export function toFormatting(tags: Tag[]) {
   return tags.map(tag => `{{${tag.tag}}}`).join('|')
 }
 
-export type Output = { [tag: string]: string }
+export type Output<T> = { [tag in keyof T]: string }
 
-export function parseLine(tags: Tag[], line: string) {
-  const split = line.split('|')
-  return split.reduce<Output>((prev, curr, index) => {
-    const key = tags[index].name
-    prev[key] = curr
-    return prev
-  }, {})
+export function parseLine<T>(tags: Tag[], line: string) {
+  const split = line
+    .replace(/[\u{0080}-\u{FFFF}]/gu, '')
+    .replace('[2J[H', '')
+    .split('|')
+  return split.reduce<Output<T>>(
+    (prev, curr, index) => {
+      const key = tags[index].name as keyof T
+      const value = key === 'id' ? curr.replace(/\W/g, '') : curr
+      prev[key] = value
+      return prev
+    },
+    {} as Output<T>
+  )
 }
 
-export function parseLines(tags: Tag[], lines: string[]) {
-  return lines.map(line => parseLine(tags, line))
+export function parseLines<T>(tags: Tag[], lines: string[]) {
+  return lines.map(line => parseLine<T>(tags, line))
+}
+
+let timerCount = 0
+export function getTimer(name: string) {
+  const count = ++timerCount
+  const start = Date.now()
+  return () => console.log(`${name}-${count} ${Date.now() - start}ms`)
 }

@@ -7,10 +7,10 @@ _Work in progress_
 ## Planned API for v1.0
 
 - Containers
-  - List containers
-  - Container detail
+  - ~~List containers~~
+  - ~~Container detail~~
   - Container control
-  - Stats monitoring
+  - ~~Stats monitoring~~
 - Images
   - Remove
   - Pull

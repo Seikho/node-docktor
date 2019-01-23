@@ -27,6 +27,7 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
+    "@types/dockerode": "^2.5.11",
     "ssh2": "^0.8.2"
   },
   "files": [
